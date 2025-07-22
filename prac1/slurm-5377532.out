@@ -1,0 +1,90 @@
+rm -rf ./bin
+mkdir -p ./bin
+nvcc prac1a.cu -o ./bin/prac1a -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z15my_first_kernelPf' for 'sm_70'
+ptxas info    : Function properties for _Z15my_first_kernelPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 10 registers, used 0 barriers, 360 bytes cmem[0]
+mkdir -p ./bin
+nvcc prac1b.cu -o ./bin/prac1b -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 35 bytes gmem, 16 bytes cmem[4]
+ptxas info    : Compiling entry function '_Z15my_first_kernelPf' for 'sm_70'
+ptxas info    : Function properties for _Z15my_first_kernelPf
+    8 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 24 registers, used 0 barriers, 8 bytes cumulative stack size, 360 bytes cmem[0]
+mkdir -p ./bin
+nvcc prac1c.cu -o ./bin/prac1c -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z17vector_add_kernelPfS_S_' for 'sm_70'
+ptxas info    : Function properties for _Z17vector_add_kernelPfS_S_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 12 registers, used 0 barriers, 376 bytes cmem[0]
+ n,  x  =  0  0.000000 
+ n,  x  =  1  1.000000 
+ n,  x  =  2  2.000000 
+ n,  x  =  3  3.000000 
+ n,  x  =  4  4.000000 
+ n,  x  =  5  5.000000 
+ n,  x  =  6  6.000000 
+ n,  x  =  7  7.000000 
+ n,  x  =  8  0.000000 
+ n,  x  =  9  1.000000 
+ n,  x  =  10  2.000000 
+ n,  x  =  11  3.000000 
+ n,  x  =  12  4.000000 
+ n,  x  =  13  5.000000 
+ n,  x  =  14  6.000000 
+ n,  x  =  15  7.000000 
+GPU Device 0: "Volta" with compute capability 7.0
+
+GPU message: thread 0 is running
+GPU message: thread 1 is running
+GPU message: thread 2 is running
+GPU message: thread 3 is running
+GPU message: thread 4 is running
+GPU message: thread 5 is running
+GPU message: thread 6 is running
+GPU message: thread 7 is running
+GPU message: thread 8 is running
+GPU message: thread 9 is running
+GPU message: thread 10 is running
+GPU message: thread 11 is running
+GPU message: thread 12 is running
+GPU message: thread 13 is running
+GPU message: thread 14 is running
+GPU message: thread 15 is running
+ n,  x  =  0  0.000000 
+ n,  x  =  1  1.000000 
+ n,  x  =  2  2.000000 
+ n,  x  =  3  3.000000 
+ n,  x  =  4  4.000000 
+ n,  x  =  5  5.000000 
+ n,  x  =  6  6.000000 
+ n,  x  =  7  7.000000 
+ n,  x  =  8  8.000000 
+ n,  x  =  9  9.000000 
+ n,  x  =  10  10.000000 
+ n,  x  =  11  11.000000 
+ n,  x  =  12  12.000000 
+ n,  x  =  13  13.000000 
+ n,  x  =  14  14.000000 
+ n,  x  =  15  15.000000 
+GPU Device 0: "Volta" with compute capability 7.0
+
+n=0, a=0.000000, b=0.000000, c=0.000000 
+n=1, a=1.000000, b=2.000000, c=3.000000 
+n=2, a=2.000000, b=4.000000, c=6.000000 
+n=3, a=3.000000, b=6.000000, c=9.000000 
+n=4, a=4.000000, b=8.000000, c=12.000000 
+n=5, a=5.000000, b=10.000000, c=15.000000 
+n=6, a=6.000000, b=12.000000, c=18.000000 
+n=7, a=7.000000, b=14.000000, c=21.000000 
+n=8, a=8.000000, b=16.000000, c=24.000000 
+n=9, a=9.000000, b=18.000000, c=27.000000 
+n=10, a=10.000000, b=20.000000, c=30.000000 
+n=11, a=11.000000, b=22.000000, c=33.000000 
+n=12, a=12.000000, b=24.000000, c=36.000000 
+n=13, a=13.000000, b=26.000000, c=39.000000 
+n=14, a=14.000000, b=28.000000, c=42.000000 
+n=15, a=15.000000, b=30.000000, c=45.000000 

@@ -1,0 +1,105 @@
+Cleaning up...
+rm -rf bin
+Building bin/laplace3d...
+nvcc laplace3d.cu laplace3d_gold.cpp -o bin/laplace3d -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z13GPU_laplace3diiiPKfPf' for 'sm_70'
+ptxas info    : Function properties for _Z13GPU_laplace3diiiPKfPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, used 0 barriers, 384 bytes cmem[0]
+Building bin/laplace3d_new...
+nvcc laplace3d_new.cu laplace3d_gold.cpp -o bin/laplace3d_new -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z13GPU_laplace3diiiPKfPf' for 'sm_70'
+ptxas info    : Function properties for _Z13GPU_laplace3diiiPKfPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 21 registers, used 0 barriers, 384 bytes cmem[0]
+Building bin/laplace3d_benchmark...
+nvcc laplace3d_benchmark.cu -o bin/laplace3d_benchmark -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z16GPU_laplace3d_v2iiiPKfPf' for 'sm_70'
+ptxas info    : Function properties for _Z16GPU_laplace3d_v2iiiPKfPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 21 registers, used 0 barriers, 384 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z16GPU_laplace3d_v1iiiPKfPf' for 'sm_70'
+ptxas info    : Function properties for _Z16GPU_laplace3d_v1iiiPKfPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, used 0 barriers, 384 bytes cmem[0]
+Grid dimensions: 512 x 512 x 512 
+
+GPU Device 0: "Volta" with compute capability 7.0
+
+Copy u1 to device: 67.7 (ms) 
+
+20x Gold_laplace3d: 29881.9 (ms) 
+
+Block dimensions: 16 x 16
+20x GPU_laplace3d: 99.5 (ms) 
+
+Copy u2 to host: 46.9 (ms) 
+
+rms error = 0.000000 
+Grid dimensions: 512 x 512 x 512 
+
+GPU Device 0: "Volta" with compute capability 7.0
+
+Copy u1 to device: 67.6 (ms) 
+
+20x Gold_laplace3d: 29898.8 (ms) 
+
+Block dimensions: 8 x 8 x 8
+20x GPU_laplace3d_new: 52.0 (ms) 
+
+Copy u2 to host: 47.4 (ms) 
+
+rms error = 0.000000 
+Running benchmark... v1 Kernel
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 1
+Block Dims: 16 x 16
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 374.23 (ms) | Time per iteration: 37.423 (ms)
+
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 1
+Block Dims: 32 x 8
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 334.13 (ms) | Time per iteration: 33.413 (ms)
+
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 1
+Block Dims: 8 x 32
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 666.79 (ms) | Time per iteration: 66.679 (ms)
+
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 1
+Block Dims: 32 x 16
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 341.90 (ms) | Time per iteration: 34.190 (ms)
+
+Running benchmark... v2 Kernel
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 2
+Block Dims: 8 x 8 x 8
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 177.65 (ms) | Time per iteration: 17.765 (ms)
+
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 2
+Block Dims: 4 x 8 x 16
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 247.91 (ms) | Time per iteration: 24.791 (ms)
+
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 2
+Block Dims: 4 x 16 x 16
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 261.83 (ms) | Time per iteration: 26.183 (ms)
+
+Grid: 1024 x 1024 x 1024 | Iterations: 10 | Version: 2
+Block Dims: 8 x 8 x 16
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total Time: 199.76 (ms) | Time per iteration: 19.976 (ms)
+
