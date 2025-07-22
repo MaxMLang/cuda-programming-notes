@@ -1,0 +1,87 @@
+rm -f ./bin/reduction ./bin/laplace3d_rms ./bin/particle_filter_benchmark
+nvcc reduction.cu -o ./bin/reduction -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcurand
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z24reduction_shuffle_kernelPdPKdi' for 'sm_70'
+ptxas info    : Function properties for _Z24reduction_shuffle_kernelPdPKdi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, used 1 barriers, 372 bytes cmem[0]
+nvcc laplace3d_rms.cu -o ./bin/laplace3d_rms -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcurand
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z24reduction_shuffle_kernelPfPKfi' for 'sm_70'
+ptxas info    : Function properties for _Z24reduction_shuffle_kernelPfPKfi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, used 1 barriers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z22compute_squared_changePKfS0_Pfi' for 'sm_70'
+ptxas info    : Function properties for _Z22compute_squared_changePKfS0_Pfi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 12 registers, used 0 barriers, 380 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z13GPU_laplace3diiiPKfPf' for 'sm_70'
+ptxas info    : Function properties for _Z13GPU_laplace3diiiPKfPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 26 registers, used 0 barriers, 384 bytes cmem[0]
+nvcc particle_filter_benchmark.cu -o ./bin/particle_filter_benchmark -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcurand
+ptxas info    : 218048 bytes gmem, 72 bytes cmem[3], 64 bytes cmem[4]
+ptxas info    : Compiling entry function '_Z15resample_kernelP8ParticlePKS_PKdP17curandStateXORWOWi' for 'sm_70'
+ptxas info    : Function properties for _Z15resample_kernelP8ParticlePKS_PKdP17curandStateXORWOWi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 26 registers, used 0 barriers, 388 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z19scan_shuffle_kernelPdPKdS_i' for 'sm_70'
+ptxas info    : Function properties for _Z19scan_shuffle_kernelPdPKdS_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 26 registers, used 1 barriers, 380 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z20scan_blelloch_kernelPdPKdS_i' for 'sm_70'
+ptxas info    : Function properties for _Z20scan_blelloch_kernelPdPKdS_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 21 registers, used 1 barriers, 380 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z13weight_kernelP8Particledi' for 'sm_70'
+ptxas info    : Function properties for _Z13weight_kernelP8Particledi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, used 0 barriers, 372 bytes cmem[0], 88 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z14predict_kernelP8ParticleP17curandStateXORWOWi' for 'sm_70'
+ptxas info    : Function properties for _Z14predict_kernelP8ParticleP17curandStateXORWOWi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 0 barriers, 372 bytes cmem[0], 184 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z21add_block_sums_kernelPdPKdi' for 'sm_70'
+ptxas info    : Function properties for _Z21add_block_sums_kernelPdPKdi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 10 registers, used 0 barriers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z16normalize_kernelPddi' for 'sm_70'
+ptxas info    : Function properties for _Z16normalize_kernelPddi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 26 registers, used 0 barriers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z22extract_weights_kernelPK8ParticlePdi' for 'sm_70'
+ptxas info    : Function properties for _Z22extract_weights_kernelPK8ParticlePdi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 8 registers, used 0 barriers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z12setup_kernelP17curandStateXORWOWyi' for 'sm_70'
+ptxas info    : Function properties for _Z12setup_kernelP17curandStateXORWOWyi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers, 372 bytes cmem[0]
+GPU Device 0: "Volta" with compute capability 7.0
+
+Computing gold standard on CPU...
+Expected Sum = 75502621.000000
+
+Running Multi-Block Shuffle Reduction...
+Grid size: 65536 blocks, 256 threads per block
+GPU Sum         = 75502621.000000
+Reduction Error = 0.000000
+Grid: 128 x 128 x 128 | Iterations: 50 | Block: 8 x 8 x 8
+GPU Device 0: "Volta" with compute capability 7.0
+
+Total GPU Time for 50 iterations: 6.07 ms
+Final RMS change after 50 iterations: 0.002299
+Running particle filter benchmark...  1. A shared-memory-based Blelloch scan.
+Initializing a 1D Particle Filter with 1048576 particles.
+Using Scan Version: Shared Memory (Blelloch)
+Starting filter loop for 100 timesteps...
+Filter loop complete.
+Total GPU Time for 100 iterations: 11.885 ms
+Time per iteration: 0.11885 ms
+2. An optimized scan using warp shuffle instructions...
+Initializing a 1D Particle Filter with 1048576 particles.
+Using Scan Version: Warp Shuffles
+Starting filter loop for 100 timesteps...
+Filter loop complete.
+Total GPU Time for 100 iterations: 10.965 ms
+Time per iteration: 0.10965 ms
