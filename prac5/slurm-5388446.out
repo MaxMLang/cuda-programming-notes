@@ -1,0 +1,78 @@
+--- Cleaning and building projects... ---
+rm -rf bin
+nvcc tensorCUBLAS.cu -o bin/tensorCUBLAS -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcublas -lcurand -lcufft
+ptxas info    : 0 bytes gmem
+nvcc simpleTensorCoreGEMM.cu -o bin/simpleTensorCoreGEMM -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcublas -lcurand -lcufft
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z17convertFp32ToFp16P6__halfPfi' for 'sm_70'
+ptxas info    : Function properties for _Z17convertFp32ToFp16P6__halfPfi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 10 registers, used 0 barriers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z12wmma_exampleP6__halfS0_Pfiiiff' for 'sm_70'
+ptxas info    : Function properties for _Z12wmma_exampleP6__halfS0_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 33 registers, used 0 barriers, 396 bytes cmem[0]
+nvcc compare_errors.cu -o bin/compare_errors -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcublas -lcurand -lcufft
+ptxas info    : 0 bytes gmem
+--- Build complete. ---
+
+--- Running simpleTensorCoreGEMM ---
+
+M = 16384, N = 16384, K = 16384. alpha = 2.000000, beta = 2.000000
+
+Running with wmma...
+Running with cuBLAS...
+
+Checking results...
+Results verified: cublas and WMMA agree.
+
+wmma took 893.484009ms
+cublas took 141.969406ms
+
+For a faster code using wmma you should check out the cudaTensorCoreGemm sample in the CUDA Toolkit.
+This code was written as a demo only!
+
+
+--- Running tensorCUBLAS ---
+Time for SGEMM without Tensor Cores: 39.344257 ms
+Time for SGEMM without Tensor Cores: 0.285696 ms
+Time for SGEMM without Tensor Cores: 0.274432 ms
+Time for SGEMM without Tensor Cores: 0.273408 ms
+Time for SGEMM without Tensor Cores: 0.268288 ms
+Verification passed!
+
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.500416 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.330752 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.324608 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.329728 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.323584 ms
+Verification passed!
+
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 17.930592 ms
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.078848 ms
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.076800 ms
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.080896 ms
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.075776 ms
+Verification passed!
+
+
+--- Running compare_errors ---
+Calculating ground truth on CPU (this may take a moment)...
+CPU calculation complete.
+
+--- Analysis for: SGEMM (No Tensor Cores, FP32) ---
+  Max Absolute Error: 2.275238e-04
+  Max Relative Error: 9.333735e-07
+---------------------------------------
+
+--- Analysis for: SGEMM (TF32 Tensor Cores) ---
+  Max Absolute Error: 2.275238e-04
+  Max Relative Error: 9.333735e-07
+---------------------------------------
+
+--- Analysis for: SGEMM (Mixed-Precision FP16) ---
+  Max Absolute Error: 1.810161e-02
+  Max Relative Error: 7.021094e-05
+---------------------------------------
+
+
