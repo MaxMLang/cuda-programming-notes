@@ -33,3 +33,9 @@
     * TF32 is a bit less accurate but faster.
     * FP16 mixed-precision is the fastest but has the largest (though still small) error.
 * This shows the main trade-off: you sacrifice some numerical precision for a big gain in speed.
+
+#### covariance_calculator - A Statistical Application
+
+* Added a final code to show how this stuff is useful in statistics.
+* It calculates a covariance matrix, which is a super common thing to do with data.
+* The core of the calculation is just mean-centering the data and then doing a big matrix multiplication (AT×A), which is perfect for cublasSgemm.

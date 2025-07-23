@@ -1,0 +1,124 @@
+--- Cleaning and building projects... ---
+rm -rf bin obj *~
+g++ -fPIC -std=c++11 -O2 -c -o obj/main.o main.cpp
+nvcc -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -I/apps/system/easybuild/software/CUDA/12.0.0/include -I. -c -o obj/prac6.o prac6.cu
+g++ -fPIC -std=c++11 -O2 -o bin/prac6 obj/main.o obj/prac6.o -L/apps/system/easybuild/software/CUDA/12.0.0/lib64 -lcudart
+nvcc -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -I/apps/system/easybuild/software/CUDA/12.0.0/include -I. -lib -o obj/prac6.a prac6.cu
+g++ -fPIC -std=c++11 -O2 -o bin/prac6a obj/main.o obj/prac6.a -L/apps/system/easybuild/software/CUDA/12.0.0/lib64 -lcudart
+nvcc -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -I/apps/system/easybuild/software/CUDA/12.0.0/include -I. -o bin/prac6b main.cpp prac6b.cu -L/apps/system/easybuild/software/CUDA/12.0.0/lib64 -lcudart
+nvcc -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -I/apps/system/easybuild/software/CUDA/12.0.0/include -I. -o bin/prac6c main.cpp prac6c.cu -L/apps/system/easybuild/software/CUDA/12.0.0/lib64 -lcudart
+g++ -fPIC -std=c++11 -O2 -c -o obj/main_stats.o main_stats.cpp
+nvcc -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -I/apps/system/easybuild/software/CUDA/12.0.0/include -I. -c -o obj/stats.o stats.cu
+g++ -fPIC -std=c++11 -O2 -o bin/stats obj/main_stats.o obj/stats.o -L/apps/system/easybuild/software/CUDA/12.0.0/lib64 -lcudart
+--- Build complete. ---
+
+--- Running prac6 ---
+ n,  x  =  0  0.000000 
+ n,  x  =  1  1.000000 
+ n,  x  =  2  2.000000 
+ n,  x  =  3  3.000000 
+ n,  x  =  4  4.000000 
+ n,  x  =  5  5.000000 
+ n,  x  =  6  6.000000 
+ n,  x  =  7  7.000000 
+ n,  x  =  8  0.000000 
+ n,  x  =  9  1.000000 
+ n,  x  =  10  2.000000 
+ n,  x  =  11  3.000000 
+ n,  x  =  12  4.000000 
+ n,  x  =  13  5.000000 
+ n,  x  =  14  6.000000 
+ n,  x  =  15  7.000000 
+
+--- Running prac6a ---
+ n,  x  =  0  0.000000 
+ n,  x  =  1  1.000000 
+ n,  x  =  2  2.000000 
+ n,  x  =  3  3.000000 
+ n,  x  =  4  4.000000 
+ n,  x  =  5  5.000000 
+ n,  x  =  6  6.000000 
+ n,  x  =  7  7.000000 
+ n,  x  =  8  0.000000 
+ n,  x  =  9  1.000000 
+ n,  x  =  10  2.000000 
+ n,  x  =  11  3.000000 
+ n,  x  =  12  4.000000 
+ n,  x  =  13  5.000000 
+ n,  x  =  14  6.000000 
+ n,  x  =  15  7.000000 
+
+--- Running prac6b ---
+ n,  x  =  0  0.000000 
+ n,  x  =  1  1.000000 
+ n,  x  =  2  2.000000 
+ n,  x  =  3  3.000000 
+ n,  x  =  4  4.000000 
+ n,  x  =  5  5.000000 
+ n,  x  =  6  6.000000 
+ n,  x  =  7  7.000000 
+ n,  x  =  8  0.000000 
+ n,  x  =  9  1.000000 
+ n,  x  =  10  2.000000 
+ n,  x  =  11  3.000000 
+ n,  x  =  12  4.000000 
+ n,  x  =  13  5.000000 
+ n,  x  =  14  6.000000 
+ n,  x  =  15  7.000000 
+ n,  i  =  0  0 
+ n,  i  =  1  1 
+ n,  i  =  2  2 
+ n,  i  =  3  3 
+ n,  i  =  4  4 
+ n,  i  =  5  5 
+ n,  i  =  6  6 
+ n,  i  =  7  7 
+ n,  i  =  8  0 
+ n,  i  =  9  1 
+ n,  i  =  10  2 
+ n,  i  =  11  3 
+ n,  i  =  12  4 
+ n,  i  =  13  5 
+ n,  i  =  14  6 
+ n,  i  =  15  7 
+
+--- Running prac6c ---
+ n,  x  =  0  4 
+ n,  x  =  1  13.8256 
+ n,  x  =  2  70.3763 
+ n,  x  =  3  444.6 
+ n,  x  =  4  3091.15 
+ n,  x  =  5  22324.3 
+ n,  x  =  6  163563 
+ n,  x  =  7  1.2048e+06 
+ n,  x  =  8  8.89207e+06 
+ n,  x  =  9  6.56761e+07 
+ n,  x  =  10  4.85209e+08 
+ n,  x  =  11  3.58503e+09 
+ n,  x  =  12  2.64894e+10 
+ n,  x  =  13  1.9573e+11 
+ n,  x  =  14  1.44626e+12 
+ n,  x  =  15  1.06865e+13 
+ n,  i  =  0  9 
+ n,  i  =  1  123.373 
+ n,  i  =  2  3967.39 
+ n,  i  =  3  180212 
+ n,  i  =  4  9.22067e+06 
+ n,  i  =  5  4.9177e+08 
+ n,  i  =  6  2.66209e+10 
+ n,  i  =  7  1.4489e+12 
+ n,  i  =  8  7.90159e+13 
+ n,  i  =  9  4.31229e+15 
+ n,  i  =  10  2.35407e+17 
+ n,  i  =  11  1.2852e+19 
+ n,  i  =  12  7.01681e+20 
+ n,  i  =  13  3.83102e+22 
+ n,  i  =  14  2.09167e+24 
+ n,  i  =  15  1.14201e+26 
+
+--- Running stats demo ---
+Generated 1048576 random numbers.
+[GPU Result] Mean: 99.998024, Standard Deviation: 14.993772
+[CPU Result] Mean: 99.998024, Standard Deviation: 14.993759
+
+

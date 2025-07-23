@@ -1,0 +1,16 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z17convertFp32ToFp16P6__halfPfi' for 'sm_70'
+ptxas info    : Function properties for _Z17convertFp32ToFp16P6__halfPfi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 10 registers, used 0 barriers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z12wmma_exampleP6__halfS0_Pfiiiff' for 'sm_70'
+ptxas info    : Function properties for _Z12wmma_exampleP6__halfS0_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 33 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z20subtract_mean_kernelPfPKfii' for 'sm_70'
+ptxas info    : Function properties for _Z20subtract_mean_kernelPfPKfii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 12 registers, used 0 barriers, 376 bytes cmem[0]

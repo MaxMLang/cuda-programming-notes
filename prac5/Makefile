@@ -9,7 +9,7 @@ LIB := -L$(CUDA_HOME)/lib64 -lcudart -lcublas -lcurand -lcufft
 NVCCFLAGS := -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math
 
 # Define the executables to be built
-TARGETS := $(BIN_DIR)/tensorCUBLAS $(BIN_DIR)/simpleTensorCoreGEMM $(BIN_DIR)/compare_errors
+TARGETS := $(BIN_DIR)/tensorCUBLAS $(BIN_DIR)/simpleTensorCoreGEMM $(BIN_DIR)/compare_errors $(BIN_DIR)/covariance_calculator
 
 # Default target to build all executables
 all: $(TARGETS)
@@ -28,6 +28,10 @@ $(BIN_DIR)/simpleTensorCoreGEMM: simpleTensorCoreGEMM.cu Makefile | $(BIN_DIR)
 
 # Rule to build the compare_errors executable
 $(BIN_DIR)/compare_errors: compare_errors.cu Makefile | $(BIN_DIR)
+	nvcc $< -o $@ $(INC) $(NVCCFLAGS) $(LIB)
+
+# Rule to build the covariance_calculator executable
+$(BIN_DIR)/covariance_calculator: covariance_calculator.cu Makefile | $(BIN_DIR)
 	nvcc $< -o $@ $(INC) $(NVCCFLAGS) $(LIB)
 
 # Clean up the built files

@@ -1,19 +1,9 @@
 --- Cleaning and building projects... ---
 rm -rf bin
 nvcc tensorCUBLAS.cu -o bin/tensorCUBLAS -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcublas -lcurand -lcufft
-ptxas info    : 0 bytes gmem
 nvcc simpleTensorCoreGEMM.cu -o bin/simpleTensorCoreGEMM -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcublas -lcurand -lcufft
-ptxas info    : 0 bytes gmem
-ptxas info    : Compiling entry function '_Z17convertFp32ToFp16P6__halfPfi' for 'sm_70'
-ptxas info    : Function properties for _Z17convertFp32ToFp16P6__halfPfi
-    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
-ptxas info    : Used 10 registers, used 0 barriers, 372 bytes cmem[0]
-ptxas info    : Compiling entry function '_Z12wmma_exampleP6__halfS0_Pfiiiff' for 'sm_70'
-ptxas info    : Function properties for _Z12wmma_exampleP6__halfS0_Pfiiiff
-    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
-ptxas info    : Used 33 registers, used 0 barriers, 396 bytes cmem[0]
 nvcc compare_errors.cu -o bin/compare_errors -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcublas -lcurand -lcufft
-ptxas info    : 0 bytes gmem
+nvcc covariance_calculator.cu -o bin/covariance_calculator -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart -lcublas -lcurand -lcufft
 --- Build complete. ---
 
 --- Running simpleTensorCoreGEMM ---
@@ -26,33 +16,33 @@ Running with cuBLAS...
 Checking results...
 Results verified: cublas and WMMA agree.
 
-wmma took 893.484009ms
-cublas took 141.969406ms
+wmma took 841.478149ms
+cublas took 142.763000ms
 
 For a faster code using wmma you should check out the cudaTensorCoreGemm sample in the CUDA Toolkit.
 This code was written as a demo only!
 
 
 --- Running tensorCUBLAS ---
-Time for SGEMM without Tensor Cores: 39.344257 ms
-Time for SGEMM without Tensor Cores: 0.285696 ms
-Time for SGEMM without Tensor Cores: 0.274432 ms
-Time for SGEMM without Tensor Cores: 0.273408 ms
-Time for SGEMM without Tensor Cores: 0.268288 ms
+Time for SGEMM without Tensor Cores: 53.419712 ms
+Time for SGEMM without Tensor Cores: 0.265216 ms
+Time for SGEMM without Tensor Cores: 0.266240 ms
+Time for SGEMM without Tensor Cores: 0.247808 ms
+Time for SGEMM without Tensor Cores: 0.266240 ms
 Verification passed!
 
-Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.500416 ms
-Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.330752 ms
-Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.324608 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.542592 ms
 Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.329728 ms
-Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.323584 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.334848 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.326656 ms
+Timie for SGEMM with Tensor Cores and TF32 (Ampere and beyond): 0.325632 ms
 Verification passed!
 
-Time for SGEMM with Tensor Cores and mixed precision (Volta): 17.930592 ms
-Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.078848 ms
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 20.379135 ms
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.079872 ms
 Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.076800 ms
-Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.080896 ms
 Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.075776 ms
+Time for SGEMM with Tensor Cores and mixed precision (Volta): 0.074752 ms
 Verification passed!
 
 
@@ -74,5 +64,11 @@ CPU calculation complete.
   Max Absolute Error: 1.810161e-02
   Max Relative Error: 7.021094e-05
 ---------------------------------------
+
+
+--- Running covariance_calculator ---
+Calculating 1024x1024 covariance matrix for 4096 samples with 1024 features.
+GPU Covariance Matrix calculation complete.
+Time taken: 6.516736 ms
 
 
