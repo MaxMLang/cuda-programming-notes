@@ -1,5 +1,8 @@
 # CUDA Programming Course Practicals
 
+![CUDA](https://img.shields.io/badge/CUDA-11.8-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+![C++](https://img.shields.io/badge/C++-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+
 Course materials from the CUDA Programming on NVIDIA GPUs course taught by Prof. Mike Giles and Prof. Wes Armour at the University of Oxford.
 
 **Course Website**: https://people.maths.ox.ac.uk/gilesm/cuda/
