@@ -6,6 +6,7 @@
 Course materials from the CUDA Programming on NVIDIA GPUs course taught by Prof. Mike Giles and Prof. Wes Armour at the University of Oxford.
 
 **Course Website**: https://people.maths.ox.ac.uk/gilesm/cuda/
+**Capstone Project**: https://github.com/MaxMLang/cuda-gis-smoothing/
 
 ## Overview
 
