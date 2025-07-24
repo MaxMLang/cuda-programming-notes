@@ -1,0 +1,90 @@
+--- Cleaning and building projects... ---
+rm -rf bin
+mkdir -p bin
+nvcc -O3 -g -arch=sm_70 -o bin/stream_legacy stream_test.cu
+nvcc -O3 -g -arch=sm_70 --default-stream per-thread -o bin/stream_per_thread stream_test.cu
+nvcc -O3 -g -arch=sm_70 -Xcompiler -fopenmp -o bin/multithread_legacy multithread_test.cu
+nvcc -O3 -g -arch=sm_70 --default-stream per-thread -Xcompiler -fopenmp -o bin/multithread_per_thread multithread_test.cu
+nvcc -O3 -g -arch=sm_70 -o bin/stream_prints_legacy stream_test_prints.cu
+nvcc -O3 -g -arch=sm_70 --default-stream per-thread -o bin/stream_prints_per_thread stream_test_prints.cu
+nvcc -O3 -g -arch=sm_70 --default-stream per-thread -o bin/overlapped_processing overlapped_processing.cu
+nvcc -O3 -g -arch=sm_70 --default-stream per-thread -o bin/statistics_example statistics_example.cu -lcurand
+--- Build complete. ---
+
+--- Running stream_legacy ---
+execution time (ms): 155.797501 
+
+--- Running stream_per_thread (expecting much faster time) ---
+execution time (ms): 19.614719 
+
+--- Running multithread_legacy ---
+ thread ID = 1 
+ thread ID = 0 
+ thread ID = 2 
+ thread ID = 3 
+ thread ID = 4 
+ thread ID = 5 
+ thread ID = 6 
+ thread ID = 7 
+execution time (ms): 141.639679 
+
+--- Running multithread_per_thread (expecting much faster time) ---
+ thread ID = 1 
+ thread ID = 0 
+ thread ID = 2 
+ thread ID = 3 
+ thread ID = 4 
+ thread ID = 5 
+ thread ID = 6 
+ thread ID = 7 
+execution time (ms): 18.797567 
+
+--- Running stream_prints_legacy (output will be interleaved) ---
+Kernel 0: starts.
+Kernel 1: starts.
+Kernel 2: starts.
+Kernel 3: starts.
+Kernel 4: starts.
+Kernel 5: starts.
+Kernel 6: starts.
+Kernel 7: starts.
+Kernel 0: finishes.
+Kernel 1: finishes.
+Kernel 2: finishes.
+Kernel 3: finishes.
+Kernel 4: finishes.
+Kernel 5: finishes.
+Kernel 6: finishes.
+Kernel 7: finishes.
+Execution time with prints (ms): 22.045696 
+
+--- Running stream_prints_per_thread (kernels should start/finish concurrently) ---
+Kernel 0: starts.
+Kernel 1: starts.
+Kernel 2: starts.
+Kernel 3: starts.
+Kernel 4: starts.
+Kernel 5: starts.
+Kernel 6: starts.
+Kernel 7: starts.
+Kernel 0: finishes.
+Kernel 1: finishes.
+Kernel 2: finishes.
+Kernel 3: finishes.
+Kernel 4: finishes.
+Kernel 5: finishes.
+Kernel 6: finishes.
+Kernel 7: finishes.
+Execution time with prints (ms): 23.315456 
+
+--- Running overlapped_processing ---
+Starting overlapped processing of 10 chunks...
+Finished processing.
+Total execution time: 19.722240 ms
+
+--- Running statistics_example (parallel bootstrapping) ---
+Starting 128 parallel bootstrap calculations...
+Finished bootstrap calculations.
+Execution Time: 51.973698 ms
+Bootstrap Estimated Mean: 0.038921
+

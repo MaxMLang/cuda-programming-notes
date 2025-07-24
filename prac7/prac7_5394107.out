@@ -1,0 +1,27 @@
+--- Cleaning and building projects... ---
+rm -rf bin
+mkdir -p bin
+nvcc ./trid_dyn.cu ./trid_gold.cpp -o bin/trid_dyn -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I./../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z12GPU_trid_dyniiPf' for 'sm_70'
+ptxas info    : Function properties for _Z12GPU_trid_dyniiPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 24 registers, used 1 barriers, 368 bytes cmem[0]
+nvcc ./trid_multi.cu ./trid_multi_gold.cpp -o bin/trid_multi -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -I./../headers -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z14GPU_trid_multiiiiPf' for 'sm_70'
+ptxas info    : Function properties for _Z14GPU_trid_multiiiiPf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 20 registers, used 1 barriers, 376 bytes cmem[0]
+--- Build complete. ---
+
+--- Running trid_dyn (Dynamic Shared Memory) ---
+GPU Device 0: "Volta" with compute capability 7.0
+
+Max error: 1.013279e-06
+
+--- Running trid_multi (Multiple Systems) ---
+GPU Device 0: "Volta" with compute capability 7.0
+
+Max error across all 64 systems: 1.068115e-04
+

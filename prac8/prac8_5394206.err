@@ -1,0 +1,25 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z14add_block_sumsPfS_j' for 'sm_70'
+ptxas info    : Function properties for _Z14add_block_sumsPfS_j
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 10 registers, used 0 barriers, 372 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z10block_scanPfS_S_j' for 'sm_70'
+ptxas info    : Function properties for _Z10block_scanPfS_S_j
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 11 registers, used 1 barriers, 380 bytes cmem[0]
+scan_shuffle.cu(85): warning #550-D: variable "final_val" was set but never used
+      float final_val = 0.0f;
+            ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+ptxas info    : 1 bytes gmem, 8 bytes cmem[4]
+ptxas info    : Compiling entry function '_Z12scan_shufflePfS_j' for 'sm_70'
+ptxas info    : Function properties for _Z12scan_shufflePfS_j
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, used 1 barriers, 372 bytes cmem[0]
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z15scan_recurrenceP6float2S0_' for 'sm_70'
+ptxas info    : Function properties for _Z15scan_recurrenceP6float2S0_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, used 1 barriers, 368 bytes cmem[0]

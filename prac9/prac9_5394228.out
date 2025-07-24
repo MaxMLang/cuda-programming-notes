@@ -1,0 +1,16 @@
+--- Cleaning and building project... ---
+rm -rf bin match
+mkdir -p bin
+nvcc match.cu match_gold.cpp -o bin/match -I/apps/system/easybuild/software/CUDA/12.6.0/include -I. -lineinfo -arch=sm_70 --ptxas-options=-v --use_fast_math -L/apps/system/easybuild/software/CUDA/12.6.0/lib64 -lcudart
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z12match_kernelPjS_Piii' for 'sm_70'
+ptxas info    : Function properties for _Z12match_kernelPjS_Piii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 20 registers, used 1 barriers, 4096 bytes smem, 384 bytes cmem[0]
+--- Build complete. ---
+
+--- Running pattern matching program ---
+ CPU matches = 3 3 18 31 
+ GPU matches = 3 3 18 31 
+
+--- Job complete ---

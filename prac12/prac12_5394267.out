@@ -1,0 +1,24 @@
+--- Cleaning and building projects... ---
+rm -rf bin
+mkdir -p bin
+nvcc -O3 -arch=sm_70 -gencode=arch=compute_70,code=sm_70 kernel_overlap.cu -o bin/kernel_overlap 
+nvcc -O3 -arch=sm_70 -gencode=arch=compute_70,code=sm_70 work_streaming.cu -o bin/work_streaming 
+nvcc -O3 -arch=sm_70 -gencode=arch=compute_70,code=sm_70 work_streaming_solution.cu -o bin/work_streaming_solution 
+nvcc -O3 -arch=sm_70 -gencode=arch=compute_70,code=sm_70 bootstrap_ci.cu -o bin/bootstrap_ci 
+--- Build complete. ---
+
+--- Running kernel_overlap ---
+Serialised time:  7.56326 ms
+Multi-stream parallel time:  0.354304 ms
+
+--- Running work_streaming (original, no overlap) ---
+Total processing time:  275.432 ms
+
+--- Running work_streaming_solution (with overlap) ---
+Total processing time with streaming: 125.97 ms
+
+--- Running bootstrap_ci (statistics example) ---
+Starting bootstrap with 16384 resamples across 4 streams...
+Bootstrap calculation time: 1383.3 ms
+95% Confidence Interval for the mean: [4.9957, 5.0067]
+
